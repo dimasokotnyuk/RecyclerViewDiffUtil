@@ -1,3 +1,3 @@
 package com.example.recyclerviewdiffutil
 
-class RandomValue(var randomValue: Int)
+data class RandomValue(var id: String, var value: Int)

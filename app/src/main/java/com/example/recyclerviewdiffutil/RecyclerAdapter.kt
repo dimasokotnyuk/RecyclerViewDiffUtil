@@ -1,6 +1,5 @@
 package com.example.recyclerviewdiffutil
 
-import android.graphics.ColorSpace.Model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,10 +38,18 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.data.addAll(newData)
     }
 
-
-    class RandomViewHolder(private val listItemView: View) : RecyclerView.ViewHolder(listItemView) {
-        fun bindValue(item: RandomValue) {
-            listItemView.tvRandom.text = item.randomValue.toString()
-        }
+    fun remove(position: Int) {
+        data.removeAt(position)
+        notifyItemRemoved(position)
     }
+
+    fun onItemMoved(fromPosition: Int, toPosition: Int) {
+        val oldItem = data[toPosition]
+        val newItem = data[fromPosition]
+        data[fromPosition] = oldItem
+        data[toPosition] = newItem
+
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
 }
